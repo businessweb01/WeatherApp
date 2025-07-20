@@ -1,8 +1,17 @@
-FROM n8nio/n8n:latest
+FROM node:18-alpine
 
-# Copy any custom configurations if needed
-# COPY ./n8n-config /home/node/.n8n
+# Install n8n globally
+RUN npm install -g n8n
 
-EXPOSE 5678
+# Set working directory
+WORKDIR /app
 
+# Set environment variables
+ENV N8N_PORT=10000
+ENV N8N_HOST=0.0.0.0
+
+# Expose port
+EXPOSE 10000
+
+# Start n8n
 CMD ["n8n", "start"]
